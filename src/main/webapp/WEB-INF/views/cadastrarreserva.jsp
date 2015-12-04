@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cadastro de Cliente</title>
+<title>Reserva</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name="author"
 	content="Rafael Sergio" />
@@ -20,24 +22,30 @@
 		<div class='col-sm-4'>
 			<div class='panel panel-default' style='margin-top: 50px;'>
 				<div class='panel-heading'>
-					<h1 class='text-center'>Cadastro de Cliente</h1>
+					<h1 class='text-center'>Reserva</h1>
 					<a href='/reservaja'> Menu</a>
 				</div>
 				<div class='panel-body'>
-					<form role='form' class='form-group' action="/reservaja/inserircliente" method="post">
-						    <label>cpf: </label> <input class='form-control' type="text" size="30" name="cpf" required="required"><br> 
-							<label>Nome: </label> <input class='form-control' type="text" size="20" name="nome" required="required"><br> 
-							<label>Data Nascimento: </label> <input class='form-control' type="text" size="20" name="datanascimento" required="required"><br> 
-							<label>Sexo: </label> <input class='form-control' type="text" size="30" name="sexo" required="required"><br> 
-							<label>Estado Civil: </label> <input class='form-control' type="text" size="30" name="estadocivil" required="required"><br> 
-							<label>Nº Filhos: </label> <input class='form-control' type="text" size="30" name="filhos" required="required"><br>
-						    <label>Telefone: </label> <input class='form-control' type="text" size="30" name="telefone" required="required"><br>
-						    <label>Estado: </label> <input class='form-control' type="text" size="30" name="estadoorigem" required="required"><br>
-						    <label>Cidade: </label> <input class='form-control' type="text" size="30" name="cidadeorigem" required="required"><br>
+					<form role='form' class='form-group' action="/reservaja/inserirreserva" method="post">
+						<label>CPF: </label>
+						<select class='form-control' name='cliente_id'>
+							<c:forEach var="cliente" items="${clientes}">
+								<option value="${cliente.getId()}">${cliente.getCpf()}</option>
+							</c:forEach>
+						</select><br>
+						<label>Data da Entrada: </label> <input class='form-control' type="text" size="20" name="dataentrada" required="required"><br> 
+						<label>Data da Saida: </label> <input class='form-control' type="text" size="20" name="datasaida" required="required"><br> 
+						<label>Quantidade de acompanhantes: </label> <input class='form-control' type="text" size="30" name="qtdacompanhantes" required="required"><br>
+						<label>Numero do Quarto: </label>
+						<select class='form-control' name='numero_quarto'>
+							<c:forEach var="quarto" items="${quartos}">
+								<option value="${quarto.getNumero()}">${quarto.getNumero()}</option>
+							</c:forEach>
+						</select><br>
 						<input class='btn btn-default' type="submit" value="Cadastrar">
 						<input class='btn btn-default' type="reset" value="Limpar">
 						<hr>
-						<a href='/reservaja/listarclientes'>Listar Clientes</a>
+						<a href='/reservaja/listarreservas'>Listar Reservas</a>
 					</form>
 				</div>
 				<div class='panel-footer'>

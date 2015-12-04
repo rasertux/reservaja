@@ -36,9 +36,18 @@ public class QuartoDao implements GenericDao {
 	}
 
 	public boolean alterar(Object objeto) {
-		QuartoBean quarto = (QuartoBean) objeto;
-		getSession().merge(quarto);
-		return true;
+		QuartoBean quarto = (QuartoBean) consultar(((QuartoBean) objeto).getNumero());
+		if (quarto != null) {
+			quarto.setAndar(((QuartoBean) objeto).getAndar());
+			quarto.setArcondicionado(((QuartoBean) objeto).isArcondicionado());
+			quarto.setCamas(((QuartoBean) objeto).getCamas());
+			quarto.setFrigobar(((QuartoBean) objeto).isFrigobar());
+			quarto.setNomehotel(((QuartoBean) objeto).getNomehotel());
+			quarto.setTelevisao(((QuartoBean) objeto).isTelevisao());
+			quarto.setTipo(((QuartoBean) objeto).getTipo());
+			return true;
+		}
+		return false;
 	}
 
 	public Object consultar(Object objeto) {

@@ -7,7 +7,7 @@
 <title>Alterar Quarto</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name="author"
-	content="Gustavo, Leandro, Rafael, Murilo, FabrÃ­cio" />
+	content="Rafael Sergio" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script type="text/javascript"
@@ -55,9 +55,7 @@
 					</form>
 				</div>
 				<div class='panel-footer'>
-					<small>&copy <a href='https://github.com/DaveKun'
-						target='_blank'>David Martins</a>, <a target='_blank'
-						href='https://github.com/rasertux'>Rafael Sérgio</a></small>
+					<small>&copy <a target='_blank' href='https://github.com/rasertux'>Rafael Sérgio</a></small>
 				</div>
 			</div>
 		</div>

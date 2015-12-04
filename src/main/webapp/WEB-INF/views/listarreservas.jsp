@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Listagem de Quartos</title>
+<title>Listagem de Reservas</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name="author"
 	content="Rafael Sergio" />
@@ -23,39 +23,34 @@
 		<div class='col-sm-8'>
 			<div class='panel panel-default' style='margin-top: 50px;'>
 				<div class='panel-heading'>
-					<h1 class='text-center'>Listagem de Quartos</h1>
+					<h1 class='text-center'>Listagem de Reservas</h1>
 					<a href='/reservaja'> Menu</a>
 				</div>
 				<div class='panel-body'>
 					<table class='table table-striped'>
 						<tr>
-							<th>Numero</th>
-							<th>Nome do Hotel</th>
-							<th>Tipo</th>
-							<th>Andar</th>
-							<th>Camas</th>
-							<th>Televisão?</th>
-							<th>Frigobar?</th>
-							<th>Arcondicionado?</th>
-							<th>Ação</th>
+							<th>Id</th>
+							<th>CPF</th>
+							<th>Data Entrada</th>
+							<th>Data Saída</th>
+							<th>Qtd Acompanhantes</th>
+							<th>Numero do quarto</th>
+							<th>Ações</th>
 						</tr>
-						<c:forEach var="quarto" items="${quartos}">
-							<tr id="qua${quarto.getNumero()}">
-								<td>${quarto.getNumero()}</td>
-								<td>${quarto.getNomehotel()}</td>
-								<td>${quarto.getTipo()}</td>
-								<td>${quarto.getAndar()}</td>
-								<td>${quarto.getCamas()}</td>
-								<td>${quarto.isTelevisao()}</td>
-								<td>${quarto.isFrigobar()}</td>
-								<td>${quarto.isArcondicionado()}</td>
-								<td><a href="#" onclick="remover(${quarto.getNumero()})">Remover</a>
-									| <a
-									href="/reservaja/editarquarto?numero=${quarto.getNumero()}">Alterar</a></td>
+						<c:forEach var="reserva" items="${reservas}">
+							<tr id="res${reserva.getId()}">
+								<td>${reserva.getId()}</td>
+								<td>${reserva.getCpf().getCpf()}</td>
+								<td>${reserva.getDataentrada()}</td>
+								<td>${reserva.getDatasaida()}</td>
+								<td>${reserva.getQtdacompanhantes()}</td>
+								<td>${reserva.getNumeroquarto().getNumero()}</td>
+								<td><a href="#" onclick="remover(${reserva.getId()})">Remover</a>
+									| <a href="/reservaja/editarreserva?id=${reserva.getId()}">Alterar</a></td>
 								<script type="text/javascript">
-								function remover(numero) {
-									$.get("/reservaja/removerquarto?", {'numero' : numero}, function() {
-									$("#qua" + numero).remove();
+								function remover(id) {
+									$.get("/reservaja/removerreserva?", {'id' : id}, function() {
+									$("#res" + id).remove();
 										});
 									}
 								</script>

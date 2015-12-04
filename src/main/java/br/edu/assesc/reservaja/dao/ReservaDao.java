@@ -36,9 +36,16 @@ public class ReservaDao implements GenericDao {
 	}
 
 	public boolean alterar(Object objeto) {
-		ReservaBean reserva = (ReservaBean) objeto;
-		getSession().merge(reserva);
-		return true;
+		ReservaBean reserva = (ReservaBean) consultar(((ReservaBean) objeto).getId());
+		if (reserva != null) {
+			reserva.setCpf(((ReservaBean) objeto).getCpf());
+			reserva.setDataentrada(((ReservaBean) objeto).getDataentrada());
+			reserva.setDatasaida(((ReservaBean) objeto).getDatasaida());
+			reserva.setNumeroquarto(((ReservaBean) objeto).getNumeroquarto());
+			reserva.setQtdacompanhantes(((ReservaBean) objeto).getQtdacompanhantes());
+			return true;
+		}
+		return false;
 	}
 
 	public Object consultar(Object objeto) {

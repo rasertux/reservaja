@@ -36,9 +36,21 @@ public class ClienteDao implements GenericDao {
 	}
 
 	public boolean alterar(Object objeto) {
-		ClienteBean cliente = (ClienteBean) objeto;
-		getSession().merge(cliente);
-		return true;
+		ClienteBean cliente = (ClienteBean) consultar(((ClienteBean) objeto).getId());
+		if (cliente != null) {
+			cliente.setNome(((ClienteBean) objeto).getNome());
+			cliente.setCelular(((ClienteBean) objeto).getCelular());
+			cliente.setEstadoorigem(((ClienteBean) objeto).getEstadoorigem());
+			cliente.setCidadeorigem(((ClienteBean) objeto).getCidadeorigem());
+			cliente.setCpf(((ClienteBean) objeto).getCpf());
+			cliente.setDatanascimento(((ClienteBean) objeto).getDatanascimento());
+			cliente.setEstadocivil(((ClienteBean) objeto).getEstadocivil());
+			cliente.setFilhos(((ClienteBean) objeto).getFilhos());
+			cliente.setSexo(((ClienteBean) objeto).getSexo());
+			cliente.setTelefone(((ClienteBean) objeto).getTelefone());
+			return true;
+		}
+		return false;
 	}
 
 	public Object consultar(Object objeto) {

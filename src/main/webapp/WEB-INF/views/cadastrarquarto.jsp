@@ -6,7 +6,7 @@
 <title>Cadastro de Quartos</title>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name="author"
-	content="Gustavo, Leandro, Rafael, Murilo, FabrÃ­cio" />
+	content="Rafael Sergio" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script type="text/javascript"
@@ -36,12 +36,11 @@
 						<input class='btn btn-default' type="submit" value="Cadastrar">
 						<input class='btn btn-default' type="reset" value="Limpar">
 						<hr>
-						<a href='/reservaja/listarquartos.jsp'>Listar Clientes</a>
+						<a href='/reservaja/listarquartos'>Listar Clientes</a>
 					</form>
 				</div>
 				<div class='panel-footer'>
-					<small>&copy <a href='https://github.com/tavogus'
-						target='_blank'>Gustavo, Leandro, Rafael, Murilo, Fabrício</a></small>
+					<small>&copy <a target='_blank' href='https://github.com/rasertux'>Rafael Sérgio</a></small>
 				</div>
 			</div>
 		</div>

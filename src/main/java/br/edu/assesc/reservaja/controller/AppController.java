@@ -9,11 +9,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import br.edu.assesc.reservaja.model.ClienteBean;
 import br.edu.assesc.reservaja.model.QuartoBean;
+import br.edu.assesc.reservaja.model.ReservaBean;
 import br.edu.assesc.reservaja.service.ClienteService;
 import br.edu.assesc.reservaja.service.QuartoService;
+import br.edu.assesc.reservaja.service.ReservaService;
 
 @Controller
 @RequestMapping("/")
@@ -26,13 +27,16 @@ public class AppController {
 	QuartoService quartoservice;
 
 	@Autowired
+	ReservaService reservaservice;
+
+	@Autowired
 	MessageSource messageSource;
 
 	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
-	
+
 	// Clientes
 
 	@RequestMapping(value = { "/cadastrarcliente" }, method = RequestMethod.GET)
@@ -77,7 +81,7 @@ public class AppController {
 		model.addAttribute("clientes", clientes);
 		return "listarclientes";
 	}
-	
+
 	// Quartos
 
 	@RequestMapping(value = { "/cadastrarquarto" }, method = RequestMethod.GET)
@@ -121,5 +125,73 @@ public class AppController {
 	public String alterarQuarto(QuartoBean quarto, BindingResult result, ModelMap model) {
 		quartoservice.alterar(quarto);
 		return "redirect:/listarquartos";
+	}
+
+	// Reservas
+
+	@RequestMapping(value = { "/cadastrarreserva" }, method = RequestMethod.GET)
+	public String cadastrarReserva(ModelMap model) {
+		@SuppressWarnings("unchecked")
+		List<ClienteBean> clientes = (List<ClienteBean>) (Object) clienteservice.getItens();
+		model.addAttribute("clientes", clientes);
+
+		@SuppressWarnings("unchecked")
+		List<QuartoBean> quartos = (List<QuartoBean>) (Object) quartoservice.getItens();
+		model.addAttribute("quartos", quartos);
+
+		ReservaBean reserva = new ReservaBean();
+		model.addAttribute("reserva", reserva);
+
+		return "cadastrarreserva";
+	}
+
+	@RequestMapping(value = { "/inserirreserva" }, method = RequestMethod.POST)
+	public String inserirReserva(String cliente_id, String numero_quarto, ReservaBean reserva, BindingResult result,
+			ModelMap model) {
+		if (result.hasErrors()) {
+			System.out.println(result.toString());
+			return "cadastrarreserva";
+		}
+		reserva.setCpf((ClienteBean) clienteservice.consultar(new Integer(cliente_id)));
+		reserva.setNumeroquarto((QuartoBean) quartoservice.consultar(new Integer(numero_quarto)));
+		reservaservice.inserir(reserva);
+		return "index";
+	}
+
+	@RequestMapping(value = { "/listarreservas" }, method = RequestMethod.GET)
+	public String listarReservas(ModelMap model) {
+		@SuppressWarnings("unchecked")
+		List<ReservaBean> reservas = (List<ReservaBean>) (Object) reservaservice.getItens();
+		model.addAttribute("reservas", reservas);
+		return "listarreservas";
+	}
+
+	@RequestMapping(value = { "/removerreserva" }, method = RequestMethod.GET)
+	public String removerReserva(Integer id) {
+		reservaservice.remover(id);
+		return "redirect:/listarreservas";
+	}
+
+	@RequestMapping(value = { "/editarreserva" }, method = RequestMethod.GET)
+	public String editarReserva(Integer id, ModelMap model) {
+		@SuppressWarnings("unchecked")
+		List<ClienteBean> clientes = (List<ClienteBean>) (Object) clienteservice.getItens();
+		model.addAttribute("clientes", clientes);
+
+		@SuppressWarnings("unchecked")
+		List<QuartoBean> quartos = (List<QuartoBean>) (Object) quartoservice.getItens();
+		model.addAttribute("quartos", quartos);
+
+		ReservaBean reserva = (ReservaBean) reservaservice.consultar(id);
+		model.addAttribute("reserva", reserva);
+		return "alterarreservas";
+	}
+
+	@RequestMapping(value = { "/alterareserva" }, method = RequestMethod.POST)
+	public String alterarReserva(String cliente_id, String numero_quarto, ReservaBean reserva, BindingResult result, ModelMap model) {
+		reserva.setCpf((ClienteBean) clienteservice.consultar(new Integer(cliente_id)));
+		reserva.setNumeroquarto((QuartoBean) quartoservice.consultar(new Integer(numero_quarto)));
+		reservaservice.alterar(reserva);
+		return "redirect:/listarreservas";
 	}
 }

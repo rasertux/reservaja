@@ -7,7 +7,7 @@
 <title>Sistema de Hotéis</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author"
-	content="Gustavo, Leandro, Rafael, Murilo, FabrÃ­cio" />
+	content="Rafael Sergio" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script type="text/javascript"
@@ -37,11 +37,14 @@
 						<a href='/reservaja/listarquartos'>Listar Quartos</a>
 					</p>
 					<p align="center">
-						<a href='/reservaja/reserva'>Fazer Reserva</a>
+						<a href='/reservaja/cadastrarreserva'>Fazer Reserva</a>
+					</p>
+					<p align="center">
+						<a href='/reservaja/listarreservas'>Listar Reservas</a>
 					</p>
 				</div>
 				<div class="panel-footer">
-					<small>&copy Gustavo, Leandro, Rafael, Murilo, FabrÃ­cio</small>
+					<small>&copy <a target='_blank' href='https://github.com/rasertux'>Rafael Sérgio</a></small>
 				</div>
 			</div>
 		</div>

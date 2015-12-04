@@ -18,6 +18,7 @@ public class ClienteBean {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "cliente_id")
 	private Integer id;
 
 	@Column(unique = true)
