@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="customtag" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +30,7 @@
 						<label>ID: </label> <input class='form-control' type="text" size="30" name="id" value="${cliente.getId()}" readonly required="required"><br> 
 						<label>cpf: </label> <input class='form-control' type="text" size="30" name="cpf" value="${cliente.getCpf()}" required="required"><br>
 						<label>Nome: </label> <input class='form-control' type="text" size="20" name="nome" value="${cliente.getNome()}" required="required"><br> 
-						<label>Data Nascimento: </label> <input class='form-control' type="text" size="20" name="datanascimento" value="${cliente.getDatanascimento()}" required="required"><br> 
+						<label>Data Nascimento: </label> <input class='form-control' type="text" size="20" name="datanascimento" value="<customtag:localDate date="${cliente.getDatanascimento()}" pattern="dd/MM/yyyy"/>" required="required"><br> 
 						<label>Sexo: </label> <input class='form-control' type="text" size="30" name="sexo" value="${cliente.getSexo()}" required="required"><br>
 						<label>Estado Civil: </label> <input class='form-control' type="text" size="30" name="estadocivil" value="${cliente.getEstadocivil()}" required="required"><br>
 						<label>Nº Filhos: </label> <input class='form-control' type="text" size="30" name="filhos" value="${cliente.getFilhos()}" required="required"><br> 

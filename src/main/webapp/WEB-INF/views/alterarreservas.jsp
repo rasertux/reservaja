@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="customtag" tagdir="/WEB-INF/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,16 +33,31 @@
 						<label>CPF: </label>
 						<select class='form-control' name='cliente_id'>
 							<c:forEach var="cliente" items="${clientes}">
-								<option value="${cliente.getId()}">${cliente.getCpf()}</option>
+								<c:choose>
+									<c:when test="${cliente.getCpf() ne reserva.getCpf().getCpf()}">
+										<option value="${cliente.getId()}">${cliente.getCpf()}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${reserva.getCpf().getId()}" selected=selected >${reserva.getCpf().getCpf()}</option>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</select><br>
-						<label>Data da Entrada: </label> <input class='form-control' type="text" size="20" name="dataentrada" value="${reserva.getDataentrada()}" required="required"><br> 
-						<label>Data da Saida: </label> <input class='form-control' type="text" size="20" name="datasaida" value="${reserva.getDatasaida()}" required="required"><br> 
+						<label>Data da Entrada: </label> <input class='form-control' type="text" size="20" name="dataentrada" value="<customtag:localDate date="${reserva.getDataentrada()}" pattern="dd/MM/yyyy"/>" required="required"><br> 
+						<label>Data da Saida: </label> <input class='form-control' type="text" size="20" name="datasaida" value="<customtag:localDate date="${reserva.getDatasaida()}" pattern="dd/MM/yyyy"/>" required="required"><br> 
 						<label>Quantidade de acompanhantes: </label> <input class='form-control' type="text" size="30" name="qtdacompanhantes" value="${reserva.getQtdacompanhantes()}" required="required"><br>
 						<label>Numero do Quarto: </label>
 						<select class='form-control' name='numero_quarto'>
 							<c:forEach var="quarto" items="${quartos}">
-								<option value="${quarto.getNumero()}">${quarto.getNumero()}</option>
+								<c:choose>
+									<c:when test="${quarto.getNumero() ne reserva.getNumeroquarto().getNumero()}">
+										<option value="${quarto.getNumero()}">${quarto.getNumero()}</option>		
+									</c:when>
+									<c:otherwise>
+										<option value="${reserva.getNumeroquarto().getNumero()}" selected=selected >${reserva.getNumeroquarto().getNumero()}</option>
+									</c:otherwise>
+								</c:choose>
+								
 							</c:forEach>
 						</select><br>
 						<input class='btn btn-default' type="submit" value="Alterar">

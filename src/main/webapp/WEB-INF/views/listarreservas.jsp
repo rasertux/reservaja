@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="customtag" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,8 +41,8 @@
 							<tr id="res${reserva.getId()}">
 								<td>${reserva.getId()}</td>
 								<td>${reserva.getCpf().getCpf()}</td>
-								<td>${reserva.getDataentrada()}</td>
-								<td>${reserva.getDatasaida()}</td>
+								<td><customtag:localDate date="${reserva.getDataentrada()}" pattern="dd/MM/yyyy"/></td>
+								<td><customtag:localDate date="${reserva.getDatasaida()}" pattern="dd/MM/yyyy"/></td>
 								<td>${reserva.getQtdacompanhantes()}</td>
 								<td>${reserva.getNumeroquarto().getNumero()}</td>
 								<td><a href="#" onclick="remover(${reserva.getId()})">Remover</a>

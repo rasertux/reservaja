@@ -25,18 +25,30 @@
 				</div>
 				<div class='panel-body'>
 					<form role='form' class='form-group' action="/reservaja/inserirquarto" method="post">
-						    <label>Numero do quarto: </label> <input class='form-control' type="text" size="30" name="numero" required="required"><br> 
-							<label>Nome do Hotel: </label> <input class='form-control' type="text" size="20" name="nomehotel" required="required"><br> 
-							<label>Tipo: </label> <input class='form-control' type="text" size="20" name="tipo" required="required"><br> 
-							<label>Andar: </label> <input class='form-control' type="text" size="30" name="andar" required="required"><br> 
-							<label>Camas: </label> <input class='form-control' type="text" size="30" name="camas" required="required"><br> 
-							<label>Televisão: </label> <input class='form-control' type="text" size="30" name="televisao" required="required"><br>
-						    <label>Frigobar: </label> <input class='form-control' type="text" size="30" name="frigobar" required="required"><br>
-						    <label>ArCondicionado: </label> <input class='form-control' type="text" size="30" name="arcondicionado" required="required"><br>
+						<label>Numero do quarto: </label> <input class='form-control' type="text" size="30" name="numero" required="required"><br> 
+						<label>Nome do Hotel: </label> <input class='form-control' type="text" size="20" name="nomehotel" required="required"><br> 
+						<label>Tipo: </label> <input class='form-control' type="text" size="20" name="tipo" required="required"><br> 
+						<label>Andar: </label> <input class='form-control' type="text" size="30" name="andar" required="required"><br> 
+						<label>Camas: </label> <input class='form-control' type="text" size="30" name="camas" required="required"><br> 
+						<div class='row-fluid'>	
+							<div class="col-sm-4">
+								<label>Televisão: </label><br> <input type="radio" name="televisao" value="True">Sim<br>
+								<input type="radio" name="televisao" value="False">Não
+							</div>
+							<div class="col-sm-4">
+						    	<label>Frigobar: </label><br> <input type="radio" name="frigobar" value="True">Sim<br>
+						    	<input type="radio" name="frigobar" value="False">Não
+						    </div>
+						    <div class="col-sm-4">
+						    	<label>ArCondicionado: </label><br> <input type="radio" name="arcondicionado" value="True">Sim<br>
+						    	<input type="radio" name="arcondicionado" value="False">Não
+						    </div>
+						</div>
+						<br>  	
 						<input class='btn btn-default' type="submit" value="Cadastrar">
 						<input class='btn btn-default' type="reset" value="Limpar">
 						<hr>
-						<a href='/reservaja/listarquartos'>Listar Clientes</a>
+						<a href='/reservaja/listarquartos'>Listar Quartos</a>
 					</form>
 				</div>
 				<div class='panel-footer'>
