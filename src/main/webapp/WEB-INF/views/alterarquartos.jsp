@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -40,16 +41,50 @@
 							value="${quarto.getAndar()}" required="required"><br>
 						<label>Camas: </label> <input class='form-control' type="text"
 							size="30" name="camas" value="${quarto.getCamas()}"
-							required="required"><br> <label>Televisão: </label>
-						<input class='form-control' type="text" size="30" name="televisao"
-							value="${quarto.isTelevisao()}" required="required"><br>
-						<label>Frigobar: </label> <input class='form-control' type="text"
-							size="30" name="frigobar" value="${quarto.isFrigobar()}"
-							required="required"><br> <label>ArCondicionado:
-						</label> <input class='form-control' type="text" size="30"
-							name="arcondicionado" value="${quarto.isArcondicionado()}"
-							required="required"><br> <input
-							class='btn btn-default' type="submit" value="Alterar">
+							required="required"><br> 
+							<div class='row-fluid'>	
+								<div class="col-sm-4">
+									<label>Televisão: </label><br> 
+									<c:choose>
+										<c:when test="${quarto.isTelevisao()}">
+											<input type="radio" name="televisao" value="True" checked >Sim<br>
+											<input type="radio" name="televisao" value="False">Não
+										</c:when>
+										<c:otherwise>
+											<input type="radio" name="televisao" value="True" >Sim<br>
+											<input type="radio" name="televisao" value="False" checked >Não
+										</c:otherwise>
+									</c:choose>
+								</div>
+							<div class="col-sm-4">
+						    	<label>Frigobar: </label><br> 
+						    	<c:choose>
+						    		<c:when test="${quarto.isFrigobar()}">
+						    			<input type="radio" name="frigobar" value="True" checked >Sim<br>
+						    			<input type="radio" name="frigobar" value="False">Não
+						    		</c:when>
+						    		<c:otherwise>
+						    			<input type="radio" name="frigobar" value="True" >Sim<br>
+						    			<input type="radio" name="frigobar" value="False" checked >Não
+						    		</c:otherwise>
+						    	</c:choose>   	
+						    </div>
+						    <div class="col-sm-4">
+						    	<label>ArCondicionado: </label><br>
+						    	<c:choose>
+						    		<c:when test="${quarto.isArcondicionado()}">
+						    			<input type="radio" name="arcondicionado" value="True" checked >Sim<br>
+						    			<input type="radio" name="arcondicionado" value="False">Não
+						    		</c:when>
+						    		<c:otherwise>
+						    			<input type="radio" name="arcondicionado" value="True">Sim<br>
+						    			<input type="radio" name="arcondicionado" value="False" checked >Não
+						    		</c:otherwise>
+						    	</c:choose>	
+						    </div>
+						</div>
+							<br>					  
+							<input class='btn btn-default' type="submit" value="Alterar">
 						<hr>
 						<a href='/reservaja/listarquartos'>Listar Quartos</a>
 					</form>

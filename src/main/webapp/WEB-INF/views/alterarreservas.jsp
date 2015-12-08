@@ -11,12 +11,13 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name="author"
 	content="Rafael Sergio" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
-<script type="text/javascript"
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel='stylesheet' href="<c:url value='/themes/css/bootstrap.min.css' />">
+<link rel='stylesheet' href="<c:url value='/themes/css/bootstrap-datepicker.min.css' />">
+<script src="<c:url value='/themes/js/jquery-1.11.3.min.js' />"></script>
+<script type="text/javascript" src="<c:url value='/themes/js/moment-with-locales.min.js' />"></script>
+<script src='<c:url value='/themes/js/bootstrap.min.js' />'></script>
+<script type="text/javascript" src="<c:url value='/themes/js/bootstrap-datepicker.min.js' />"></script>
+<script src="<c:url value='/themes/js/locales/bootstrap-datepicker.pt-BR.min.js' />" charset="UTF-8"></script>
 </head>
 <body class='container-fluid'>
 	<div class='row'>
@@ -43,8 +44,8 @@
 								</c:choose>
 							</c:forEach>
 						</select><br>
-						<label>Data da Entrada: </label> <input class='form-control' type="text" size="20" name="dataentrada" value="<customtag:localDate date="${reserva.getDataentrada()}" pattern="dd/MM/yyyy"/>" required="required"><br> 
-						<label>Data da Saida: </label> <input class='form-control' type="text" size="20" name="datasaida" value="<customtag:localDate date="${reserva.getDatasaida()}" pattern="dd/MM/yyyy"/>" required="required"><br> 
+						<label>Data da Entrada: </label> <customtag:campoData id="dataentrada" value="${reserva.getDataentrada()}" /><br> 
+						<label>Data da Saida: </label> <customtag:campoData id="datasaida" value="${reserva.getDatasaida()}" /><br> 
 						<label>Quantidade de acompanhantes: </label> <input class='form-control' type="text" size="30" name="qtdacompanhantes" value="${reserva.getQtdacompanhantes()}" required="required"><br>
 						<label>Numero do Quarto: </label>
 						<select class='form-control' name='numero_quarto'>

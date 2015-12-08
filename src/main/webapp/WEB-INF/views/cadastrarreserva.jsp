@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="customtag" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,12 +10,13 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name="author"
 	content="Rafael Sergio" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
-<script type="text/javascript"
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel='stylesheet' href="<c:url value='/themes/css/bootstrap.min.css' />">
+<link rel='stylesheet' href="<c:url value='/themes/css/bootstrap-datepicker.min.css' />">
+<script src="<c:url value='/themes/js/jquery-1.11.3.min.js' />"></script>
+<script type="text/javascript" src="<c:url value='/themes/js/moment-with-locales.min.js' />"></script>
+<script src='<c:url value='/themes/js/bootstrap.min.js' />'></script>
+<script type="text/javascript" src="<c:url value='/themes/js/bootstrap-datepicker.min.js' />"></script>
+<script src="<c:url value='/themes/js/locales/bootstrap-datepicker.pt-BR.min.js' />" charset="UTF-8"></script>
 </head>
 <body class='container-fluid'>
 	<div class='row'>
@@ -33,8 +35,8 @@
 								<option value="${cliente.getId()}">${cliente.getCpf()}</option>
 							</c:forEach>
 						</select><br>
-						<label>Data da Entrada: </label> <input class='form-control' type="text" size="20" name="dataentrada" required="required"><br> 
-						<label>Data da Saida: </label> <input class='form-control' type="text" size="20" name="datasaida" required="required"><br> 
+						<label>Data da Entrada: </label> <customtag:campoData id="dataentrada" /><br> 
+						<label>Data da Saida: </label> <customtag:campoData id="datasaida" /><br> 
 						<label>Quantidade de acompanhantes: </label> <input class='form-control' type="text" size="30" name="qtdacompanhantes" required="required"><br>
 						<label>Numero do Quarto: </label>
 						<select class='form-control' name='numero_quarto'>
