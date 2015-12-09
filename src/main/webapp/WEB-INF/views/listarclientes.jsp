@@ -34,6 +34,7 @@
 							<th>Estado Civil</th>
 							<th>Numero Filhos</th>
 							<th>Telefone</th>
+							<th>Celular</th>
 							<th>Cidade</th>
 							<th>Ações</th>
 						</tr>
@@ -47,6 +48,7 @@
 								<td>${cliente.getEstadocivil()}</td>
 								<td>${cliente.getFilhos()}</td>
 								<td>${cliente.getTelefone()}</td>
+								<td>${cliente.getCelular()}</td>
 								<td>${cliente.getCidadeorigem()}</td>
 								<td><a href="#" onclick="remover(${cliente.getCpf()})">Remover</a>
 									| <a href="/reservaja/editarcliente?id=${cliente.getId()}">Alterar</a></td>

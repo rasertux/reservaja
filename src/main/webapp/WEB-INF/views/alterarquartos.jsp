@@ -25,63 +25,116 @@
 				<div class='panel-body'>
 					<form class='form-group' action="/reservaja/alteraquarto"
 						method="post">
-						<label>Numero do quarto: </label> <input class='form-control'
-							type="text" size="30" name="numero" readonly
-							value="${quarto.getNumero()}" required="required"><br>
-						<label>Nome do Hotel: </label> <input class='form-control'
-							type="text" size="20" name="nomehotel"
-							value="${quarto.getNomehotel()}" required="required"><br>
-						<label>Tipo: </label> <input class='form-control' type="text"
-							size="20" name="tipo" value="${quarto.getTipo()}"
-							required="required"><br> <label>Andar: </label> <input
-							class='form-control' type="text" size="30" name="andar"
-							value="${quarto.getAndar()}" required="required"><br>
-						<label>Camas: </label> <input class='form-control' type="text"
-							size="30" name="camas" value="${quarto.getCamas()}"
-							required="required"><br> 
-							<div class='row-fluid'>	
-								<div class="col-sm-4">
-									<label>Televisão: </label><br> 
-									<c:choose>
-										<c:when test="${quarto.isTelevisao()}">
-											<input type="radio" name="televisao" value="True" checked >Sim<br>
-											<input type="radio" name="televisao" value="False">Não
-										</c:when>
-										<c:otherwise>
-											<input type="radio" name="televisao" value="True" >Sim<br>
-											<input type="radio" name="televisao" value="False" checked >Não
-										</c:otherwise>
-									</c:choose>
+						<label>Numero do quarto: </label> 
+						<input class='form-control' type="text" size="30" name="numero" readonly value="${quarto.getNumero()}" required="required"><br>
+						<label>Nome do Hotel: </label> 
+						<input class='form-control' type="text" size="20" name="nomehotel" value="${quarto.getNomehotel()}" required="required"><br>
+						<label>Tipo: </label>
+						<c:choose>
+							<c:when test="${quarto.getTipo() eq 'Luxo'}">
+								<div class="radio">
+									<label><input type="radio" name="tipo" value="Luxo" checked >Luxo</label>
 								</div>
+								<div class="radio">	
+									<label><input type="radio" name="tipo" value="Standard">Standard</label>
+								</div>
+								<div class="radio">	
+									<label><input type="radio" name="tipo" value="Presidencial">Presidencial</label>
+								</div>
+							</c:when>
+							<c:when test="${quarto.getTipo() eq 'Standard'}">
+								<div class="radio">
+									<label><input type="radio" name="tipo" value="Luxo">Luxo</label>
+								</div>
+								<div class="radio">	
+									<label><input type="radio" name="tipo" value="Standard" checked >Standard</label>
+								</div>
+								<div class="radio">	
+									<label><input type="radio" name="tipo" value="Presidencial">Presidencial</label>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="radio">
+									<label><input type="radio" name="tipo" value="Luxo">Luxo</label>
+								</div>
+								<div class="radio">	
+									<label><input type="radio" name="tipo" value="Standard">Standard</label>
+								</div>
+								<div class="radio">	
+									<label><input type="radio" name="tipo" value="Presidencial" checked >Presidencial</label>
+								</div>
+							</c:otherwise>
+						</c:choose>
+						<label>Andar: </label> <input class='form-control' type="text" size="30" name="andar" value="${quarto.getAndar()}" required="required"><br>
+						<label>Camas: </label> 
+						<input class='form-control' type="text" size="30" name="camas" value="${quarto.getCamas()}" required="required"><br> 
+						<div class='row-fluid'>	
 							<div class="col-sm-4">
-						    	<label>Frigobar: </label><br> 
-						    	<c:choose>
-						    		<c:when test="${quarto.isFrigobar()}">
-						    			<input type="radio" name="frigobar" value="True" checked >Sim<br>
-						    			<input type="radio" name="frigobar" value="False">Não
-						    		</c:when>
-						    		<c:otherwise>
-						    			<input type="radio" name="frigobar" value="True" >Sim<br>
-						    			<input type="radio" name="frigobar" value="False" checked >Não
-						    		</c:otherwise>
-						    	</c:choose>   	
-						    </div>
-						    <div class="col-sm-4">
-						    	<label>ArCondicionado: </label><br>
-						    	<c:choose>
-						    		<c:when test="${quarto.isArcondicionado()}">
-						    			<input type="radio" name="arcondicionado" value="True" checked >Sim<br>
-						    			<input type="radio" name="arcondicionado" value="False">Não
-						    		</c:when>
-						    		<c:otherwise>
-						    			<input type="radio" name="arcondicionado" value="True">Sim<br>
-						    			<input type="radio" name="arcondicionado" value="False" checked >Não
-						    		</c:otherwise>
-						    	</c:choose>	
-						    </div>
+								<label>Televisão: </label>
+								<c:choose>
+									<c:when test="${quarto.isTelevisao()}">
+										<div class="radio">
+											<label><input type="radio" name="televisao" value="True" checked >Sim</label>
+										</div>
+										<div class="radio">	
+											<label><input type="radio" name="televisao" value="False">Não</label>
+										</div>	
+									</c:when>
+									<c:otherwise>
+										<div class="radio">
+											<label><input type="radio" name="televisao" value="True" >Sim</label>
+										</div>
+										<div class="radio">	
+											<label><input type="radio" name="televisao" value="False" checked >Não</label>
+										</div>	
+									</c:otherwise>
+								</c:choose>
+							</div>
+						<div class="col-sm-4">
+						   	<label>Frigobar: </label><br> 
+						   	<c:choose>
+						   		<c:when test="${quarto.isFrigobar()}">
+						   			<div class="radio">
+						   				<label><input type="radio" name="frigobar" value="True" checked >Sim</label>
+						   			</div>
+						   			<div class="radio">	
+						   				<label><input type="radio" name="frigobar" value="False">Não</label>
+						   			</div>	
+						   		</c:when>
+						   		<c:otherwise>
+						   			<div class="radio">
+						   				<label><input type="radio" name="frigobar" value="True" >Sim</label>
+						   			</div>
+						   			<div class="radio">	
+						   				<label><input type="radio" name="frigobar" value="False" checked >Não</label>
+						   			</div>	
+						   		</c:otherwise>
+						   	</c:choose>   	
+						   </div>
+						   <div class="col-sm-4">
+						   	<label>ArCondicionado: </label><br>
+						   	<c:choose>
+						   		<c:when test="${quarto.isArcondicionado()}">
+						   			<div class="radio">
+						   				<label><input type="radio" name="arcondicionado" value="True" checked >Sim</label>
+						   			</div>
+						   			<div class="radio">	
+						   				<label><input type="radio" name="arcondicionado" value="False">Não</label>
+						   			</div>	
+						   		</c:when>
+						   		<c:otherwise>
+						   			<div class="radio">
+						   				<label><input type="radio" name="arcondicionado" value="True">Sim</label>
+						   			</div>
+						   			<div class="radio">	
+						   				<label><input type="radio" name="arcondicionado" value="False" checked >Não</label>
+						   			</div>	
+						   		</c:otherwise>
+						   	</c:choose>	
+						   </div>
 						</div>
-							<br>					  
-							<input class='btn btn-default' type="submit" value="Alterar">
+						<br>					  
+						<input class='btn btn-default' type="submit" value="Alterar">
 						<hr>
 						<a href='/reservaja/listarquartos'>Listar Quartos</a>
 					</form>

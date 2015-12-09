@@ -56,6 +56,7 @@
 							</select>
 							<br>
 						    <label>Telefone: </label> <input class='form-control' type="text" size="30" name="telefone" required="required"><br>
+						    <label>Celular: </label> <input class='form-control' type="text" size="30" name="celular" required="required"><br>
 						    <label>Estado: </label> <input class='form-control' type="text" size="30" name="estadoorigem" required="required"><br>
 						    <label>Cidade: </label> <input class='form-control' type="text" size="30" name="cidadeorigem" required="required"><br>
 						<input class='btn btn-default' type="submit" value="Cadastrar">
