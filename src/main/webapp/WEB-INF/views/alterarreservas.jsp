@@ -48,7 +48,7 @@
 						<label>Data da Saida: </label> <customtag:campoData id="datasaida" value="${reserva.getDatasaida()}" /><br> 
 						<label>Quantidade de acompanhantes: </label> <input class='form-control' type="text" size="30" name="qtdacompanhantes" value="${reserva.getQtdacompanhantes()}" required="required"><br>
 						<label>Numero do Quarto: </label>
-						<select class='form-control' name='numero_quarto'>
+						<select class="form-control" name="numero_quarto">
 							<c:forEach var="quarto" items="${quartos}">
 								<c:choose>
 									<c:when test="${quarto.getNumero() ne reserva.getNumeroquarto().getNumero()}">

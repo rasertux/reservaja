@@ -31,7 +31,7 @@ public class ClienteBean {
 	@Type(type = "java.time.LocalDate")
 	private LocalDate datanascimento;
 
-	private String sexo;
+	private char sexo;
 	private String estadocivil;
 	private Integer filhos;
 	private String telefone;
@@ -71,11 +71,11 @@ public class ClienteBean {
 		this.datanascimento = datanascimento;
 	}
 
-	public String getSexo() {
+	public char getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(String sexo) {
+	public void setSexo(char sexo) {
 		this.sexo = sexo;
 	}
 
@@ -126,5 +126,4 @@ public class ClienteBean {
 	public void setEstadoorigem(String estadoorigem) {
 		this.estadoorigem = estadoorigem;
 	}
-
 }

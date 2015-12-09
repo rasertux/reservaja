@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author"
 	content="Rafael Sergio" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
-<script type="text/javascript"
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel='stylesheet' href="<c:url value='/themes/css/bootstrap.min.css' />">
+<script src="<c:url value='/themes/js/jquery-1.11.3.min.js' />"></script>
+<script src='<c:url value='/themes/js/bootstrap.min.js' />'></script>
 </head>
 <body class="container-fluid">
 	<div class="row">

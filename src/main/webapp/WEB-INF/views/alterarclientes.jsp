@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="customtag" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -33,9 +34,75 @@
 						<label>cpf: </label> <input class='form-control' type="text" size="30" name="cpf" value="${cliente.getCpf()}" required="required"><br>
 						<label>Nome: </label> <input class='form-control' type="text" size="20" name="nome" value="${cliente.getNome()}" required="required"><br> 
 						<label>Data Nascimento: </label> <customtag:campoData id="datanascimento" value="${cliente.getDatanascimento()}" /><br> 
-						<label>Sexo: </label> <input class='form-control' type="text" size="30" name="sexo" value="${cliente.getSexo()}" required="required"><br>
-						<label>Estado Civil: </label> <input class='form-control' type="text" size="30" name="estadocivil" value="${cliente.getEstadocivil()}" required="required"><br>
-						<label>Nº Filhos: </label> <input class='form-control' type="text" size="30" name="filhos" value="${cliente.getFilhos()}" required="required"><br> 
+						<label>Sexo: </label>
+							<c:choose>
+								<c:when test="${cliente.getSexo() eq 'M'.charAt(0)}">
+									<div class="radio">
+										<label><input type="radio" name="sexo" value='M' checked >Masculino</label>
+									</div>
+									<div class="radio">	
+										<label><input type="radio" name="sexo" value='F'>Feminino</label>
+									</div>	
+								</c:when>
+								<c:otherwise>
+									<div class="radio">
+										<label><input type="radio" name="sexo" value='M' >Masculino</label>
+									</div>
+									<div class="radio">	
+										<label><input type="radio" name="sexo" value='F' checked >Feminino</label>
+									</div>	
+								</c:otherwise>
+							</c:choose>
+						<label>Estado Civil: </label>
+							<c:choose>
+								<c:when test="${cliente.getEstadocivil() eq 'Casado/a'}">
+									<div class="radio">
+										<label><input type="radio" name="estadocivil" value="Casado/a" checked >Casado/a</label>
+									</div>
+									<div class="radio">
+										<label><input type="radio" name="estadocivil" value="Solteiro/a">Solteiro/a</label>
+									</div>
+									<div class="radio">	
+										<label><input type="radio" name="estadocivil" value="Viúvo/a">Viúvo/a</label>
+									</div>	
+								</c:when>
+								<c:when test="${cliente.getEstadocivil() eq 'Solteiro/a'}">
+									<div class="radio">
+										<label><input type="radio" name="estadocivil" value="Casado/a">Casado/a</label>
+									</div>
+									<div class="radio">
+										<label><input type="radio" name="estadocivil" value="Solteiro/a" checked >Solteiro/a</label>
+									</div>
+									<div class="radio">	
+										<label><input type="radio" name="estadocivil" value="Viúvo/a">Viúvo/a</label>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="radio">
+										<label><input type="radio" name="estadocivil" value="Casado/a">Casado/a</label>
+									</div>
+									<div class="radio">
+										<label><input type="radio" name="estadocivil" value="Solteiro/a">Solteiro/a</label>
+									</div>
+									<div class="radio">	
+										<label><input type="radio" name="estadocivil" value="Viúvo/a" checked >Viúvo/a</label>
+									</div>
+								</c:otherwise>
+							</c:choose>
+						<label>Nº Filhos: </label>
+						<select class="form-control" name="filhos">
+							<c:forEach begin="0" end="10" varStatus="loop">
+								<c:choose>
+									<c:when test="${cliente.getFilhos() ne loop.index}">
+										<option value="${loop.index}" >${loop.index}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${cliente.getFilhos()}" selected=selected >${cliente.getFilhos()}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</select>
+						<br> 
 						<label>Telefone: </label> <input class='form-control' type="text" size="30" name="telefone" value="${cliente.getTelefone()}" required="required"><br>
 						<label>Estado: </label> <input class='form-control' type="text" size="30" name="estadoorigem" value="${cliente.getEstadoorigem()}" required="required"><br>
 						<label>Cidade: </label> <input class='form-control' type="text" size="30" name="cidadeorigem" value="${cliente.getCidadeorigem()}" required="required"><br>

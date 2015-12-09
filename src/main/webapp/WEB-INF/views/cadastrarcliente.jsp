@@ -31,9 +31,30 @@
 						    <label>cpf: </label> <input class='form-control' type="text" size="30" name="cpf" required="required"><br> 
 							<label>Nome: </label> <input class='form-control' type="text" size="20" name="nome" required="required"><br> 
 							<label>Data Nascimento: </label> <customtag:campoData id="datanascimento" /><br> 
-							<label>Sexo: </label> <input class='form-control' type="text" size="30" name="sexo" required="required"><br> 
-							<label>Estado Civil: </label> <input class='form-control' type="text" size="30" name="estadocivil" required="required"><br> 
-							<label>Nº Filhos: </label> <input class='form-control' type="text" size="30" name="filhos" required="required"><br>
+							<label>Sexo: </label>
+							<div class="radio">
+								<label><input type="radio" name="sexo" value='M'>Masculino</label>
+							</div>
+							<div class="radio">
+								<label><input type="radio" name="sexo" value='F'>Feminino</label>
+							</div>
+							<label>Estado Civil: </label>
+							<div class="radio">
+								<label><input type="radio" name="estadocivil" value="Casado/a">Casado/a</label>
+							</div>
+							<div class="radio">
+								<label><input type="radio" name="estadocivil" value="Solteiro/a">Solteiro/a</label>
+							</div>
+							<div class="radio">
+								<label><input type="radio" name="estadocivil" value="Viúvo/a">Viúvo/a</label>
+							</div> 
+							<label>Nº Filhos: </label>
+							<select class="form-control" name="filhos">
+								<c:forEach begin="0" end="10" varStatus="loop">
+									<option value="${loop.index}" >${loop.index}</option>
+								</c:forEach>
+							</select>
+							<br>
 						    <label>Telefone: </label> <input class='form-control' type="text" size="30" name="telefone" required="required"><br>
 						    <label>Estado: </label> <input class='form-control' type="text" size="30" name="estadoorigem" required="required"><br>
 						    <label>Cidade: </label> <input class='form-control' type="text" size="30" name="cidadeorigem" required="required"><br>
