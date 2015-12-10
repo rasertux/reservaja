@@ -12,6 +12,7 @@
 	content="Rafael Sergio" />
 <link rel='stylesheet' href="<c:url value='/themes/css/bootstrap.min.css' />">
 <script src="<c:url value='/themes/js/jquery-1.11.3.min.js' />"></script>
+<script src="<c:url value='/themes/js/removercliente.js' />"></script>
 <script src='<c:url value='/themes/js/bootstrap.min.js' />'></script>
 </head>
 <body class='container-fluid'>
@@ -50,15 +51,9 @@
 								<td>${cliente.getTelefone()}</td>
 								<td>${cliente.getCelular()}</td>
 								<td>${cliente.getCidadeorigem()}</td>
-								<td><a href="#" onclick="remover(${cliente.getCpf()})">Remover</a>
-									| <a href="/reservaja/editarcliente?id=${cliente.getId()}">Alterar</a></td>
-								<script type="text/javascript">
-								function remover(cpf) {
-									$.get("/reservaja/removercliente?", {'cpf' : cpf}, function() {
-									$("#cli" + cpf).remove();
-										});
-									}
-								</script>
+								<td><a href="#" onclick="removercliente(${cliente.getCpf()})"><img src="<c:url value='/themes/imgs/remover.png' />" width='15%'></a>
+									| <a href="/reservaja/editarcliente?id=${cliente.getId()}"><img src="<c:url value='/themes/imgs/alterar.png' />" width='15%'></a>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>

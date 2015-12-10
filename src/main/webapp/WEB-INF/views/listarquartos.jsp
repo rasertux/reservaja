@@ -12,6 +12,7 @@
 	content="Rafael Sergio" />
 <link rel='stylesheet' href="<c:url value='/themes/css/bootstrap.min.css' />">
 <script src="<c:url value='/themes/js/jquery-1.11.3.min.js' />"></script>
+<script src="<c:url value='/themes/js/removerquarto.js' />"></script>
 <script src='<c:url value='/themes/js/bootstrap.min.js' />'></script>
 </head>
 <body class='container-fluid'>
@@ -46,16 +47,9 @@
 								<td>${quarto.isTelevisao()}</td>
 								<td>${quarto.isFrigobar()}</td>
 								<td>${quarto.isArcondicionado()}</td>
-								<td><a href="#" onclick="remover(${quarto.getNumero()})">Remover</a>
-									| <a
-									href="/reservaja/editarquarto?numero=${quarto.getNumero()}">Alterar</a></td>
-								<script type="text/javascript">
-								function remover(numero) {
-									$.get("/reservaja/removerquarto?", {'numero' : numero}, function() {
-									$("#qua" + numero).remove();
-										});
-									}
-								</script>
+								<td><a href="#" onclick="removerquarto(${quarto.getNumero()})"><img src="<c:url value='/themes/imgs/remover.png' />" width='15%'></a>
+									| <a href="/reservaja/editarquarto?numero=${quarto.getNumero()}"><img src="<c:url value='/themes/imgs/alterar.png' />" width='15%'></a>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>

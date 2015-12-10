@@ -12,6 +12,7 @@
 	content="Rafael Sergio" />
 <link rel='stylesheet' href="<c:url value='/themes/css/bootstrap.min.css' />">
 <script src="<c:url value='/themes/js/jquery-1.11.3.min.js' />"></script>
+<script src="<c:url value='/themes/js/removerreserva.js' />"></script>
 <script src='<c:url value='/themes/js/bootstrap.min.js' />'></script>
 </head>
 <body class='container-fluid'>
@@ -42,15 +43,9 @@
 								<td><customtag:localDate date="${reserva.getDatasaida()}" pattern="dd/MM/yyyy"/></td>
 								<td>${reserva.getQtdacompanhantes()}</td>
 								<td>${reserva.getNumeroquarto().getNumero()}</td>
-								<td><a href="#" onclick="remover(${reserva.getId()})">Remover</a>
-									| <a href="/reservaja/editarreserva?id=${reserva.getId()}">Alterar</a></td>
-								<script type="text/javascript">
-								function remover(id) {
-									$.get("/reservaja/removerreserva?", {'id' : id}, function() {
-									$("#res" + id).remove();
-										});
-									}
-								</script>
+								<td><a href="#" onclick="removerreserva(${reserva.getId()})"><img src="<c:url value='/themes/imgs/remover.png' />" width='12%'></a>
+									| <a href="/reservaja/editarreserva?id=${reserva.getId()}"><img src="<c:url value='/themes/imgs/alterar.png' />" width='12%'></a>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>
