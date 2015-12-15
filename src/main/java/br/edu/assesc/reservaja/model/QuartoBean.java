@@ -4,19 +4,29 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "quartos")
 public class QuartoBean {
 
 	@Id
-	@Column(name = "num_quarto")
+	@NotNull
+	@Digits(integer = 8, fraction = 0)
+	@Column(name = "num_quarto", nullable = false, unique = true)
 	private Integer numero;
 
 	private String nomehotel;
 	private String tipo;
+	
+	@NotNull
+	@Digits(integer = 8, fraction = 0)
 	private Integer andar;
+	
+	@Digits(integer = 8, fraction = 0)
 	private Integer camas;
+	
 	private boolean televisao;
 	private boolean frigobar;
 	private boolean arcondicionado;

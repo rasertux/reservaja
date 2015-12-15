@@ -23,19 +23,19 @@
 				</div>
 				<div class="panel-body">
 					<p align="center">
-						<a href='/reservaja/cadastrarcliente'>Cadastrar Clientes</a>
+						<a href='/reservaja/inserircliente'>Cadastrar Clientes</a>
 					</p>
 					<p align="center">
 						<a href='/reservaja/listarclientes'>Listar Clientes</a>
 					</p>
 					<p align="center">
-						<a href='/reservaja/cadastrarquarto'>Cadastrar Quartos</a>
+						<a href='/reservaja/inserirquarto'>Cadastrar Quartos</a>
 					</p>
 					<p align="center">
 						<a href='/reservaja/listarquartos'>Listar Quartos</a>
 					</p>
 					<p align="center">
-						<a href='/reservaja/cadastrarreserva'>Fazer Reserva</a>
+						<a href='/reservaja/inserirreserva'>Fazer Reserva</a>
 					</p>
 					<p align="center">
 						<a href='/reservaja/listarreservas'>Listar Reservas</a>

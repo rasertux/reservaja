@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="customtag" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -28,17 +29,41 @@
 					<a href='/reservaja'> Menu</a>
 				</div>
 				<div class='panel-body'>
-					<form role='form' class='form-group' action="/reservaja/inserirreserva" method="post">
-						<label>CPF: </label>
+					<form:form role='form' class='form-group' action="/reservaja/inserirreserva" method="post" modelAttribute="reserva">
+						<label for="cpf">CPF: </label>
 						<select class='form-control' name='cliente_id'>
 							<c:forEach var="cliente" items="${clientes}">
 								<option value="${cliente.getId()}">${cliente.getCpf()}</option>
 							</c:forEach>
 						</select><br>
-						<label>Data da Entrada: </label> <customtag:campoData id="dataentrada" /><br> 
-						<label>Data da Saida: </label> <customtag:campoData id="datasaida" /><br> 
-						<label>Quantidade de acompanhantes: </label> <input class='form-control' type="text" size="30" name="qtdacompanhantes" required="required"><br>
-						<label>Numero do Quarto: </label>
+						<label for="dataentrada">Data da Entrada: </label> 
+						<customtag:campoData id="dataentrada" /><br>
+						<c:choose>
+						   	<c:when test="${erros}">
+						   		<div>
+						   			<form:errors path="dataentrada" cssClass="alert alert-danger"/><br><br>
+						   		</div>
+						   	</c:when>
+						</c:choose>
+						<label for="datasaida">Data da Saida: </label> 
+						<customtag:campoData id="datasaida" /><br>
+						<c:choose>
+						   	<c:when test="${erros}">
+						   		<div>
+						   			<form:errors path="datasaida" cssClass="alert alert-danger"/><br><br>
+						   		</div>
+						   	</c:when>
+						</c:choose>
+						<label for="qtdacompanhantes">Quantidade de acompanhantes: </label> 
+						<form:input class='form-control' id="qtdacompanhantes" path="qtdacompanhantes" /><br>
+						<c:choose>
+						   	<c:when test="${erros}">
+						   		<div>
+						   			<form:errors path="qtdacompanhantes" cssClass="alert alert-danger"/><br><br>
+						   		</div>
+						   	</c:when>
+						</c:choose>
+						<label for="numero_quarto">Numero do Quarto: </label>
 						<select class='form-control' name='numero_quarto'>
 							<c:forEach var="quarto" items="${quartos}">
 								<option value="${quarto.getNumero()}">${quarto.getNumero()}</option>
@@ -48,7 +73,7 @@
 						<input class='btn btn-default' type="reset" value="Limpar">
 						<hr>
 						<a href='/reservaja/listarreservas'>Listar Reservas</a>
-					</form>
+					</form:form>
 				</div>
 				<div class='panel-footer'>
 					<small>&copy <a target='_blank' href='https://github.com/rasertux'>Rafael Sérgio</a></small>

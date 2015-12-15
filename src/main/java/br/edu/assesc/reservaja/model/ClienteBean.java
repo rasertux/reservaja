@@ -1,6 +1,7 @@
 package br.edu.assesc.reservaja.model;
 
-import java.time.LocalDate;
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,8 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -21,19 +26,27 @@ public class ClienteBean {
 	@Column(name = "cliente_id")
 	private Integer id;
 
-	@Column(unique = true)
+	@NotBlank
+	@CPF
+	@Column(unique = true, nullable = false)
 	private String cpf;
 
+	@NotBlank
 	private String nome;
 
+	@NotNull
+	@Past
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Type(type = "java.time.LocalDate")
-	private LocalDate datanascimento;
+	@Type(type = "java.util.Calendar")
+	private Calendar datanascimento;
 
 	private char sexo;
 	private String estadocivil;
+
+	@Digits(integer = 8, fraction = 0)
 	private Integer filhos;
+
 	private String telefone;
 	private String celular;
 	private String cidadeorigem;
@@ -63,11 +76,11 @@ public class ClienteBean {
 		this.nome = nome;
 	}
 
-	public LocalDate getDatanascimento() {
+	public Calendar getDatanascimento() {
 		return datanascimento;
 	}
 
-	public void setDatanascimento(LocalDate datanascimento) {
+	public void setDatanascimento(Calendar datanascimento) {
 		this.datanascimento = datanascimento;
 	}
 

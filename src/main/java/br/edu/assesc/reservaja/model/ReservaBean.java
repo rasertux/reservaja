@@ -1,6 +1,7 @@
 package br.edu.assesc.reservaja.model;
 
-import java.time.LocalDate;
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,18 +29,21 @@ public class ReservaBean {
 	@JoinColumn(name = "cliente_id")
 	private ClienteBean cpf;
 
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Type(type = "java.time.LocalDate")
+	@Type(type = "java.util.Calendar")
 	@Column(name = "dt_entrada")
-	private LocalDate dataentrada;
+	private Calendar dataentrada;
 
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Type(type = "java.time.LocalDate")
+	@Type(type = "java.util.Calendar")
 	@Column(name = "dt_saida")
-	private LocalDate datasaida;
+	private Calendar datasaida;
 
+	@Digits(integer = 8, fraction = 0)
 	private Integer qtdacompanhantes;
 
 	@ManyToOne(optional = false)
@@ -60,19 +66,19 @@ public class ReservaBean {
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataentrada() {
+	public Calendar getDataentrada() {
 		return dataentrada;
 	}
 
-	public void setDataentrada(LocalDate dataentrada) {
+	public void setDataentrada(Calendar dataentrada) {
 		this.dataentrada = dataentrada;
 	}
 
-	public LocalDate getDatasaida() {
+	public Calendar getDatasaida() {
 		return datasaida;
 	}
 
-	public void setDatasaida(LocalDate datasaida) {
+	public void setDatasaida(Calendar datasaida) {
 		this.datasaida = datasaida;
 	}
 
@@ -91,5 +97,4 @@ public class ReservaBean {
 	public void setNumeroquarto(QuartoBean numeroquarto) {
 		this.numeroquarto = numeroquarto;
 	}
-
 }

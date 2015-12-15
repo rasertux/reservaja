@@ -17,7 +17,7 @@ public class ClienteServiceImpl implements ClienteService {
 	@Qualifier("ClienteDao")
 	private GenericDao dao;
 
-	public Object consultar(int id) {
+	public Object consultar(Integer id) {
 		return dao.consultar(id);
 	}
 

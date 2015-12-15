@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="customtag" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,8 +40,8 @@
 							<tr id="res${reserva.getId()}">
 								<td>${reserva.getId()}</td>
 								<td>${reserva.getCpf().getCpf()}</td>
-								<td><customtag:localDate date="${reserva.getDataentrada()}" pattern="dd/MM/yyyy"/></td>
-								<td><customtag:localDate date="${reserva.getDatasaida()}" pattern="dd/MM/yyyy"/></td>
+								<td><fmt:formatDate value="${reserva.getDataentrada().time}" type="date" pattern="dd/MM/yyyy"/></td>
+								<td><fmt:formatDate value="${reserva.getDatasaida().time}" type="date" pattern="dd/MM/yyyy"/></td>
 								<td>${reserva.getQtdacompanhantes()}</td>
 								<td>${reserva.getNumeroquarto().getNumero()}</td>
 								<td><a href="#" onclick="removerreserva(${reserva.getId()})"><img src="<c:url value='/themes/imgs/remover.png' />" width='12%'></a>

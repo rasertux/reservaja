@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="customtag" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,26 +28,50 @@
 					<a href='/reservaja'> Menu</a>
 				</div>
 				<div class='panel-body'>
-					<form role='form' class='form-group' action="/reservaja/inserircliente" method="post">
-						    <label>cpf: </label> <input class='form-control' type="text" size="30" name="cpf" required="required"><br> 
-							<label>Nome: </label> <input class='form-control' type="text" size="20" name="nome" required="required"><br> 
-							<label>Data Nascimento: </label> <customtag:campoData id="datanascimento" /><br> 
-							<label>Sexo: </label>
+					<form:form role='form' class='form-group' action="/reservaja/inserircliente" method="post" modelAttribute="cliente">
+						    <label for="cpf">cpf: </label>
+						    <form:input class='form-control' path="cpf" id="cpf" /><br>
+						    <c:choose>
+						    	<c:when test="${erros}">
+						    		<div>
+						    			<form:errors path="cpf" cssClass="alert alert-danger"/><br><br>
+						    		</div>
+						    	</c:when>
+						    </c:choose> 
+							<label for="nome">Nome: </label> 
+							<form:input class='form-control' path="nome" id="nome" /><br>
+							<c:choose>
+						    	<c:when test="${erros}">
+						    		<div>	
+						    			<form:errors path="nome" cssClass="alert alert-danger"/><br><br>
+									</div>
+						    	</c:when>
+						    </c:choose> 
+							<label for="datanascimento">Data Nascimento: </label> 
+							<customtag:campoData id="datanascimento" /><br>
+							<c:choose>
+						    	<c:when test="${erros}">
+						    		<div>	
+						    			<form:errors path="datanascimento" cssClass="alert alert-danger"/><br><br> 
+									</div>
+						    	</c:when>
+						    </c:choose> 
+							<label for="sexo">Sexo: </label>
 							<div class="radio">
-								<label><input type="radio" name="sexo" value='M'>Masculino</label>
+								<label><form:radiobutton path="sexo" id="sexo" value='M' />Masculino</label>
 							</div>
 							<div class="radio">
-								<label><input type="radio" name="sexo" value='F'>Feminino</label>
+								<label><form:radiobutton path="sexo" id="sexo" value='F' />Feminino</label>
 							</div>
-							<label>Estado Civil: </label>
+							<label for="estadocivil">Estado Civil: </label>
 							<div class="radio">
-								<label><input type="radio" name="estadocivil" value="Casado/a">Casado/a</label>
-							</div>
-							<div class="radio">
-								<label><input type="radio" name="estadocivil" value="Solteiro/a">Solteiro/a</label>
+								<label><form:radiobutton path="estadocivil" id="estadocivil" value="Casado/a" />Casado/a</label>
 							</div>
 							<div class="radio">
-								<label><input type="radio" name="estadocivil" value="Viúvo/a">Viúvo/a</label>
+								<label><form:radiobutton path="estadocivil" id="estadocivil" value="Solteiro/a" />Solteiro/a</label>
+							</div>
+							<div class="radio">
+								<label><form:radiobutton path="estadocivil" id="estadocivil" value="Viúvo/a" />Viúvo/a</label>
 							</div> 
 							<label>Nº Filhos: </label>
 							<select class="form-control" name="filhos">
@@ -55,15 +80,19 @@
 								</c:forEach>
 							</select>
 							<br>
-						    <label>Telefone: </label> <input class='form-control' type="text" size="30" name="telefone" required="required"><br>
-						    <label>Celular: </label> <input class='form-control' type="text" size="30" name="celular" required="required"><br>
-						    <label>Estado: </label> <input class='form-control' type="text" size="30" name="estadoorigem" required="required"><br>
-						    <label>Cidade: </label> <input class='form-control' type="text" size="30" name="cidadeorigem" required="required"><br>
+						    <label for="telefone">Telefone: </label> 
+						    <form:input class='form-control' path="telefone" id="telefone" /><br>
+						    <label for="celular">Celular: </label> 
+						    <form:input class='form-control' path="celular" id="celular" /><br>
+						    <label for="estadoorigem">Estado: </label> 
+						    <form:input class='form-control' path="estadoorigem" id="estadoorigem" /><br>
+						    <label for="cidadeorigem">Cidade: </label> 
+						    <form:input class='form-control' path="cidadeorigem" id="cidadeorigem" /><br>
 						<input class='btn btn-default' type="submit" value="Cadastrar">
 						<input class='btn btn-default' type="reset" value="Limpar">
 						<hr>
 						<a href='/reservaja/listarclientes'>Listar Clientes</a>
-					</form>
+					</form:form>
 				</div>
 				<div class='panel-footer'>
 					<small>&copy <a target='_blank' href='https://github.com/rasertux'>Rafael Sérgio</a></small>

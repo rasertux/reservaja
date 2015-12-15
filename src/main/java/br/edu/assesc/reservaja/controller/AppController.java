@@ -2,11 +2,14 @@ package br.edu.assesc.reservaja.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import br.edu.assesc.reservaja.model.ClienteBean;
@@ -39,20 +42,22 @@ public class AppController {
 
 	// Clientes
 
-	@RequestMapping(value = { "/cadastrarcliente" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/inserircliente" }, method = RequestMethod.GET)
 	public String cadastrarCliente(ModelMap model) {
 		ClienteBean cliente = new ClienteBean();
 		model.addAttribute("cliente", cliente);
+		model.addAttribute("erros", false);
 		return "cadastrarcliente";
 	}
 
 	@RequestMapping(value = { "/inserircliente" }, method = RequestMethod.POST)
-	public String inserirCliente(ClienteBean cliente, BindingResult result, ModelMap model) {
+	public String inserirCliente(@Valid @ModelAttribute("cliente") ClienteBean cliente, BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
+			model.addAttribute("erros", true);
 			return "cadastrarcliente";
 		}
 		clienteservice.inserir(cliente);
-		return "index";
+		return "redirect:/listarclientes";
 	}
 
 	@RequestMapping(value = { "/removercliente" }, method = RequestMethod.GET)
@@ -62,8 +67,8 @@ public class AppController {
 	}
 
 	@RequestMapping(value = { "/editarcliente" }, method = RequestMethod.GET)
-	public String editarCliente(Integer id, ModelMap model) {
-		ClienteBean cliente = (ClienteBean) clienteservice.consultar(id);
+	public String editarCliente(String id, ModelMap model) {
+		ClienteBean cliente = (ClienteBean) clienteservice.consultar(new Integer(id));
 		model.addAttribute("cliente", cliente);
 		return "alterarclientes";
 	}
@@ -84,20 +89,22 @@ public class AppController {
 
 	// Quartos
 
-	@RequestMapping(value = { "/cadastrarquarto" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/inserirquarto" }, method = RequestMethod.GET)
 	public String cadastrarQuarto(ModelMap model) {
 		QuartoBean quarto = new QuartoBean();
 		model.addAttribute("quarto", quarto);
+		model.addAttribute("erros", false);
 		return "cadastrarquarto";
 	}
 
 	@RequestMapping(value = { "/inserirquarto" }, method = RequestMethod.POST)
-	public String inserirQuarto(QuartoBean quarto, BindingResult result, ModelMap model) {
+	public String inserirQuarto(@Valid @ModelAttribute("quarto") QuartoBean quarto, BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
+			model.addAttribute("erros", true);
 			return "cadastrarquarto";
 		}
 		quartoservice.inserir(quarto);
-		return "index";
+		return "redirect:/listarquartos";
 	}
 
 	@RequestMapping(value = { "/listarquartos" }, method = RequestMethod.GET)
@@ -129,7 +136,7 @@ public class AppController {
 
 	// Reservas
 
-	@RequestMapping(value = { "/cadastrarreserva" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/inserirreserva" }, method = RequestMethod.GET)
 	public String cadastrarReserva(ModelMap model) {
 		@SuppressWarnings("unchecked")
 		List<ClienteBean> clientes = (List<ClienteBean>) (Object) clienteservice.getItens();
@@ -141,21 +148,24 @@ public class AppController {
 
 		ReservaBean reserva = new ReservaBean();
 		model.addAttribute("reserva", reserva);
+		
+		model.addAttribute("erros", false);
 
 		return "cadastrarreserva";
 	}
 
 	@RequestMapping(value = { "/inserirreserva" }, method = RequestMethod.POST)
-	public String inserirReserva(String cliente_id, String numero_quarto, ReservaBean reserva, BindingResult result,
+	public String inserirReserva(String cliente_id, String numero_quarto, @Valid @ModelAttribute("reserva") ReservaBean reserva, BindingResult result,
 			ModelMap model) {
 		if (result.hasErrors()) {
+			model.addAttribute("erros", true);
 			System.out.println(result.toString());
 			return "cadastrarreserva";
 		}
 		reserva.setCpf((ClienteBean) clienteservice.consultar(new Integer(cliente_id)));
 		reserva.setNumeroquarto((QuartoBean) quartoservice.consultar(new Integer(numero_quarto)));
 		reservaservice.inserir(reserva);
-		return "index";
+		return "redirect:/listarreservas";
 	}
 
 	@RequestMapping(value = { "/listarreservas" }, method = RequestMethod.GET)
@@ -188,8 +198,8 @@ public class AppController {
 	}
 
 	@RequestMapping(value = { "/alterareserva" }, method = RequestMethod.POST)
-	public String alterarReserva(String cliente_id, String numero_quarto, ReservaBean reserva, BindingResult result, ModelMap model) {
-		reserva.setCpf((ClienteBean) clienteservice.consultar(new Integer(cliente_id)));
+	public String alterarReserva(String id, String numero_quarto, ReservaBean reserva, BindingResult result, ModelMap model) {
+		reserva.setCpf((ClienteBean) clienteservice.consultar(new Integer(id)));
 		reserva.setNumeroquarto((QuartoBean) quartoservice.consultar(new Integer(numero_quarto)));
 		reservaservice.alterar(reserva);
 		return "redirect:/listarreservas";
