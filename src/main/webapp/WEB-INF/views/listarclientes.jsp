@@ -28,7 +28,6 @@
 				<div class='panel-body'>
 					<table class='table table-striped'>
 						<tr>
-							<th>Id</th>
 							<th>cpf</th>
 							<th>Nome</th>
 							<th>Data Nascimento</th>
@@ -42,7 +41,6 @@
 						</tr>
 						<c:forEach var="cliente" items="${clientes}">
 							<tr id="cli${cliente.getCpf()}">
-								<td>${cliente.getId()}</td>
 								<td>${cliente.getCpf()}</td>
 								<td>${cliente.getNome()}</td>
 								<td><fmt:formatDate value="${cliente.getDatanascimento().time}" type="date" pattern="dd/MM/yyyy"/></td>
@@ -53,7 +51,7 @@
 								<td>${cliente.getCelular()}</td>
 								<td>${cliente.getCidadeorigem()}</td>
 								<td><a href="#" onclick="removercliente(${cliente.getCpf()})"><img src="<c:url value='/themes/imgs/remover.png' />" width='15%'></a>
-									| <a href="/reservaja/editarcliente?id=${cliente.getId()}"><img src="<c:url value='/themes/imgs/alterar.png' />" width='15%'></a>
+									| <a href="/reservaja/editarcliente?cpf=${cliente.getCpf()}"><img src="<c:url value='/themes/imgs/alterar.png' />" width='15%'></a>
 								</td>
 							</tr>
 						</c:forEach>

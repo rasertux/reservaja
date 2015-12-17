@@ -14,7 +14,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -26,20 +25,18 @@ public class ReservaBean {
 	private Integer id;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "cliente_id")
+	@JoinColumn(name = "cpf")
 	private ClienteBean cpf;
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Type(type = "java.util.Calendar")
 	@Column(name = "dt_entrada")
 	private Calendar dataentrada;
 
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Type(type = "java.util.Calendar")
 	@Column(name = "dt_saida")
 	private Calendar datasaida;
 

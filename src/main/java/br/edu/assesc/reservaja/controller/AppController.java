@@ -67,14 +67,19 @@ public class AppController {
 	}
 
 	@RequestMapping(value = { "/editarcliente" }, method = RequestMethod.GET)
-	public String editarCliente(String id, ModelMap model) {
-		ClienteBean cliente = (ClienteBean) clienteservice.consultar(new Integer(id));
+	public String editarCliente(String cpf, ModelMap model) {
+		ClienteBean cliente = (ClienteBean) clienteservice.consultar(cpf);
 		model.addAttribute("cliente", cliente);
+		model.addAttribute("erros", false);
 		return "alterarclientes";
 	}
 
 	@RequestMapping(value = { "/alteracliente" }, method = RequestMethod.POST)
-	public String alterarCliente(ClienteBean cliente, BindingResult result, ModelMap model) {
+	public String alterarCliente(@Valid @ModelAttribute("cliente") ClienteBean cliente, BindingResult result, ModelMap model) {
+		if (result.hasErrors()) {
+			model.addAttribute("erros", true);
+			return "cadastrarcliente";
+		}
 		clienteservice.alterar(cliente);
 		return "redirect:/listarclientes";
 	}
@@ -155,14 +160,14 @@ public class AppController {
 	}
 
 	@RequestMapping(value = { "/inserirreserva" }, method = RequestMethod.POST)
-	public String inserirReserva(String cliente_id, String numero_quarto, @Valid @ModelAttribute("reserva") ReservaBean reserva, BindingResult result,
+	public String inserirReserva(String cpf, String numero_quarto, @Valid @ModelAttribute("reserva") ReservaBean reserva, BindingResult result,
 			ModelMap model) {
 		if (result.hasErrors()) {
 			model.addAttribute("erros", true);
 			System.out.println(result.toString());
 			return "cadastrarreserva";
 		}
-		reserva.setCpf((ClienteBean) clienteservice.consultar(new Integer(cliente_id)));
+		reserva.setCpf((ClienteBean) clienteservice.consultar(cpf));
 		reserva.setNumeroquarto((QuartoBean) quartoservice.consultar(new Integer(numero_quarto)));
 		reservaservice.inserir(reserva);
 		return "redirect:/listarreservas";
@@ -198,8 +203,8 @@ public class AppController {
 	}
 
 	@RequestMapping(value = { "/alterareserva" }, method = RequestMethod.POST)
-	public String alterarReserva(String id, String numero_quarto, ReservaBean reserva, BindingResult result, ModelMap model) {
-		reserva.setCpf((ClienteBean) clienteservice.consultar(new Integer(id)));
+	public String alterarReserva(String cpf, String numero_quarto, ReservaBean reserva, BindingResult result, ModelMap model) {
+		reserva.setCpf((ClienteBean) clienteservice.consultar(cpf));
 		reserva.setNumeroquarto((QuartoBean) quartoservice.consultar(new Integer(numero_quarto)));
 		reservaservice.alterar(reserva);
 		return "redirect:/listarreservas";

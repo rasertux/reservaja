@@ -36,7 +36,7 @@ public class ClienteDao implements GenericDao {
 	}
 
 	public boolean alterar(Object objeto) {
-		ClienteBean cliente = (ClienteBean) consultar(((ClienteBean) objeto).getId());
+		ClienteBean cliente = (ClienteBean) consultar(((ClienteBean) objeto).getCpf());
 		if (cliente != null) {
 			cliente.setNome(((ClienteBean) objeto).getNome());
 			cliente.setCelular(((ClienteBean) objeto).getCelular());
@@ -54,8 +54,8 @@ public class ClienteDao implements GenericDao {
 	}
 
 	public Object consultar(Object objeto) {
-		Integer id = (Integer) objeto;
-		return getSession().get(ClienteBean.class, id);
+		String cpf = (String) objeto;
+		return getSession().get(ClienteBean.class, cpf);
 	}
 
 	@SuppressWarnings("unchecked")

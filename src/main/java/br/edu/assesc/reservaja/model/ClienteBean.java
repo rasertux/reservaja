@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -12,7 +11,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,11 +20,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class ClienteBean {
 
 	@Id
-	@GeneratedValue
-	@Column(name = "cliente_id")
-	private Integer id;
-
-	@NotBlank
 	@CPF
 	@Column(unique = true, nullable = false)
 	private String cpf;
@@ -38,7 +31,6 @@ public class ClienteBean {
 	@Past
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Type(type = "java.util.Calendar")
 	private Calendar datanascimento;
 
 	private char sexo;
@@ -51,14 +43,6 @@ public class ClienteBean {
 	private String celular;
 	private String cidadeorigem;
 	private String estadoorigem;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getCpf() {
 		return cpf;

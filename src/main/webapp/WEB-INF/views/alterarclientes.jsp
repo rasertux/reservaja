@@ -3,6 +3,7 @@
 <%@ taglib prefix="customtag" tagdir="/WEB-INF/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,11 +30,34 @@
 					<a href='/reservaja'> Menu</a>
 				</div>
 				<div class='panel-body'>
-					<form class='form-group' action="/reservaja/alteracliente" method="post">
-						<label>ID: </label> <input class='form-control' type="text" size="30" name="id" value="${cliente.getId()}" readonly required="required"><br> 
-						<label>cpf: </label> <input class='form-control' type="text" size="30" name="cpf" value="${cliente.getCpf()}" required="required"><br>
-						<label>Nome: </label> <input class='form-control' type="text" size="20" name="nome" value="${cliente.getNome()}" required="required"><br> 
-						<label>Data Nascimento: </label> <customtag:campoData id="datanascimento" value="${cliente.getDatanascimento()}" /><br> 
+					<form:form class='form-group' action="/reservaja/alteracliente" method="post" modelAttribute="cliente"> 
+						<label for="cpf">cpf: </label> 
+						<form:input class='form-control' path="cpf" id="cpf" value="${cliente.getCpf()}" /><br>
+						<c:choose>
+						   	<c:when test="${erros}">
+						   		<div>
+						   			<form:errors path="cpf" cssClass="alert alert-danger"/><br><br>
+						   		</div>	
+						   	</c:when>
+						</c:choose> 
+						<label for="nome">Nome: </label> 
+						<form:input class='form-control' path="nome" id="nome" value="${cliente.getNome()}" /><br>
+						<c:choose>
+						   	<c:when test="${erros}">
+						   		<div>
+						   			<form:errors path="nome" cssClass="alert alert-danger"/><br><br>
+						   		</div>	
+						   	</c:when>
+						</c:choose> 
+						<label for="datanascimento">Data Nascimento: </label> 
+						<customtag:campoData id="datanascimento" value="${cliente.getDatanascimento().time}" /><br>
+						<c:choose>
+						   	<c:when test="${erros}">
+						   		<div>
+						   			<form:errors path="datanascimento" cssClass="alert alert-danger"/><br><br>
+						   		</div>	
+						   	</c:when>
+						</c:choose> 
 						<label>Sexo: </label>
 							<c:choose>
 								<c:when test="${cliente.getSexo() eq 'M'.charAt(0)}">
@@ -110,7 +134,7 @@
 						<input class='btn btn-default' type="submit" value="Alterar">
 						<hr>
 						<a href='/reservaja/listarcliente'>Listar Clientes</a>
-					</form>
+					</form:form>
 				</div>
 				<div class='panel-footer'>
 					<small>&copy <a target='_blank' href='https://github.com/rasertux'>Rafael Sérgio</a></small>

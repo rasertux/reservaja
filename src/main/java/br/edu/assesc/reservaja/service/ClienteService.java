@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ClienteService {
 
-	Object consultar(Integer id);
+	Object consultar(String cpf);
 
 	void inserir(Object objeto);
 

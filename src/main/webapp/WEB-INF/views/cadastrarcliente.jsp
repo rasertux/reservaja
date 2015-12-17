@@ -35,7 +35,7 @@
 						    	<c:when test="${erros}">
 						    		<div>
 						    			<form:errors path="cpf" cssClass="alert alert-danger"/><br><br>
-						    		</div>
+						    		</div>	
 						    	</c:when>
 						    </c:choose> 
 							<label for="nome">Nome: </label> 
@@ -47,7 +47,7 @@
 									</div>
 						    	</c:when>
 						    </c:choose> 
-							<label for="datanascimento">Data Nascimento: </label> 
+							<label for="datanascimento">Data Nascimento: </label>
 							<customtag:campoData id="datanascimento" /><br>
 							<c:choose>
 						    	<c:when test="${erros}">

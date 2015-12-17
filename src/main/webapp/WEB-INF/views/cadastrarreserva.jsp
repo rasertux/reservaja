@@ -31,9 +31,9 @@
 				<div class='panel-body'>
 					<form:form role='form' class='form-group' action="/reservaja/inserirreserva" method="post" modelAttribute="reserva">
 						<label for="cpf">CPF: </label>
-						<select class='form-control' name='cliente_id'>
+						<select class='form-control' name='cpf'>
 							<c:forEach var="cliente" items="${clientes}">
-								<option value="${cliente.getId()}">${cliente.getCpf()}</option>
+								<option value="${cliente.getCpf()}">${cliente.getCpf()}</option>
 							</c:forEach>
 						</select><br>
 						<label for="dataentrada">Data da Entrada: </label> 

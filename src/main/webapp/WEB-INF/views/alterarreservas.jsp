@@ -32,11 +32,11 @@
 					<form class='form-group' action="/reservaja/alterareserva" method="post">
 						<label>Id Reserva: </label> <input class='form-control' type="text" size="30" name="id" readonly value="${reserva.getId()}" required="required"><br>
 						<label>CPF: </label>
-						<select class='form-control' name='cliente_id'>
+						<select class='form-control' name='cpf'>
 							<c:forEach var="cliente" items="${clientes}">
 								<c:choose>
 									<c:when test="${cliente.getCpf() ne reserva.getCpf().getCpf()}">
-										<option value="${cliente.getId()}">${cliente.getCpf()}</option>
+										<option value="${cliente.getCpf()}">${cliente.getCpf()}</option>
 									</c:when>
 									<c:otherwise>
 										<option value="${reserva.getCpf().getId()}" selected=selected >${reserva.getCpf().getCpf()}</option>
